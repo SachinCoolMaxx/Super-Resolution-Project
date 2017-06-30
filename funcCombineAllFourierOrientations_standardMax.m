@@ -24,7 +24,7 @@ for ax_iter = 1:size(all_axes, 1)
     % rotate by -pi/2 to the curr_axes
     axS2 = rotImg3(currS2_r, -pi/2, curr_axes, 'linear',0);
     axS2(isnan(axS2)) = 0;
-%   axS2 = axS2(maxdiff+1:maxdiff+sz(1), maxdiff+1:maxdiff+sz(2), maxdiff+1:maxdiff+sz(3));
+%   axS2 = axS2(md(1)+1:md(1)+sz(1), md(2)+1:md(2)+sz(2), md(3)+1:md(3)+sz(3));
     
     axialS2{ax_iter} = axS2;
     fftAxialS2{ax_iter} = fftn(axialS2{ax_iter});
@@ -48,6 +48,7 @@ for iter = 1:length(axialS2)
     end
 end
 
+
 % code for unpadding according to the image size, u need to add extra 1 to
 % both sides, if image is odd sized, becz paddinf is like x+1 and x
 if(mod(sz(1),2)==1)
@@ -70,12 +71,6 @@ S2_HR = S2_HR(md(1)+1+x:md(1)+sz(1)+x, md(2)+1+y:md(2)+sz(2)+y, md(3)+1+z:md(3)+
 
 end
 
-
-
-
-%---------------------------------------------------------
-%my random experimental stuff
-% S2_HR = S2_HR(md(1)+2:md(1)+sz(1)+1, md(2)+2:md(2)+sz(2)+1, md(3)+1:md(3)+sz(3));
 
 
 % indices;
@@ -187,20 +182,7 @@ end
 % figure;
 % imagesc(abs(finalFFT(:,:,90)));
 
-% finalFFT = zeros(256,256,256);
-% indices=zeros(256,256,256);
-% for iter = 1:length(axialS2)
-%     for i=1:256
-%         for j=1:256
-%             for k=1:256
-%                 if abs(fftAxialS2{iter}(i,j,k))>=abs(finalFFT(i,j,k))
-%                     finalFFT(i,j,k)=fftAxialS2{iter}(i,j,k);
-%                     indices(i,j,k)=iter;               
-%                 end
-%             end
-%         end
-%     end
-% end
+
 
 
 

@@ -44,7 +44,6 @@ if(ax == [0,0,1])
     return
 end
 
-
 sz = size(img);
 ratM = rotationmat3D(teta, ax);
 
@@ -80,9 +79,16 @@ yout = XYZt(:,2);
 zout = XYZt(:,3);
 
 imagerotF = interp3(imagepad, yout, xout, zout, method);
-
+run='original'
 im = reshape(imagerotF, size(imagepad));
 
+q = size(im)
+% for k=1:180
+%         testng(:,k) = im(:,149,k)';
+% end
+%      
+%    figure('Name','afterrotatnSameSlice');
+%    imagesc(testng);
 % 
 % %shrink image to use minimal size
 % idx=find(abs(im)>0);

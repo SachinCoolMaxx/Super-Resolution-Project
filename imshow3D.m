@@ -1,4 +1,4 @@
-function  imshow3D( Img, disprange )
+    function  imshow3D( Img, disprange )
 %IMSHOW3D displays 3D grayscale or RGB images in slice by slice fashion
 %with mouse based slice browsing and window and level adjustment control.
 %

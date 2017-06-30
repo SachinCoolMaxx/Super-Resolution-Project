@@ -22,7 +22,7 @@ temp_results_dir = '/iacl/pg17/sachin/for_sachin/results/NeuroMM/2mmNew/temp/'
 % comparison with ground truth
 truth_dir =  '/iacl/pg17/sachin/for_sachin/data/NeuroMM/grndtruth/'
 true_list = dir([truth_dir,'*.nii']);
-interp_psnr = zeros(9,1);
+interp_psnr = zeros(18,1);
 %all_psnr = zeros(3,20,9)
 
 
@@ -109,9 +109,15 @@ for iter = 1: length(data_list)
     
     % directions of different blurs that we will consider
     
-      all_axes = [1,0,0;
-                0,1,0;
-                0,0,1];
+    all_axes = [1,0,0;
+        0,1,0;
+        1,1,0;
+        -1,1,0;
+        1,1,1;
+        1,1,-1;
+        -1,1,1;
+        -1,1,-1
+        0,0,1];
         
     angles = [pi/2];
     
@@ -152,7 +158,7 @@ for iter = 1: length(data_list)
             upscaling = rot_blur_magn + [1;1;1];
             upscaling = round(upscaling');
             
-            whatisupscaling=upscaling
+            upscaling
             
             
             % this can be very memory inefficient. if memory is falling
@@ -214,7 +220,6 @@ for iter = 1: length(data_list)
             
             % patch size
             N1 = upscaling.*window;
-            patchsize = N1
             border = [15, 15, 15];
             
             % can be increased when there are lots of interpolation
@@ -258,7 +263,7 @@ for iter = 1: length(data_list)
             tmp.img = S2_HR;
             tmp.hdr.dime.dim = [3 size(S2_HR,1) size(S2_HR,2) size(S2_HR,3) 1 1 1 1];
             tmp.hdr.dime.pixdim = [1 HRvoxel_size_y HRvoxel_size_x HRvoxel_size_z 0 0 0 0];
-            outfile = [results_dir,subjname, '_varPatchsize_ANR_truncSinc_FinalSuperRes_pMaximum(p=infi)',num2str(p),'_NEWRotationFunctionResults3dpatches_withHROldnewrotation',num2str(window),'_9dirOrderChanged_.nii'];
+            outfile = [results_dir,subjname, '(p=infi)',num2str(p),'_NEW9999RotationFunctionResults3dpatches_withHROldnewrotation',num2str(window),'_9dirOrderChanged_.nii'];
             
             tmp.fileprefix = outfile;
             save_untouch_nii(tmp, outfile);
